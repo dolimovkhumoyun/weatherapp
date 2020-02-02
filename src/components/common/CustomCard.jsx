@@ -54,7 +54,7 @@ const CustomCard = ({ tempInfo, hourly }) => {
             </Grid>
             <Grid item xs={6}>
               <img
-                src={`http://openweathermap.org/img/wn/${tempInfo.weather[0].icon}@2x.png`}
+                src={`https://openweathermap.org/img/wn/${tempInfo.weather[0].icon}@2x.png`}
                 alt=""
                 className={classes.icon}
               />
