@@ -8,6 +8,8 @@ import { CircularProgress } from "@material-ui/core";
 
 import sunny from "../../assets/image/sunny.jpg";
 import sun from "../../assets/image/sun.svg";
+import CustomSlider from "./CustomSlider";
+import { kelvinToCelcium } from "../../utils/utils";
 
 const useStyles = makeStyles({
   card: {
@@ -17,14 +19,14 @@ const useStyles = makeStyles({
     marginTop: 10
   },
   title: {
-    paddingLeft: 140,
+    paddingLeft: 120,
     paddingBottom: 100
   },
   media: {
-    height: "85vh"
+    height: "30vh"
   },
   icon: {
-    marginLeft: 5,
+    marginLeft: 15,
     height: 25
   },
   weather: {
@@ -36,16 +38,12 @@ const useStyles = makeStyles({
   }
 });
 
-const CustomCard = ({ tempInfo }) => {
+const CustomCard = ({ tempInfo, hourly }) => {
   const classes = useStyles();
 
-  const kelvinToCelcium = kelvin => {
-    return kelvin - 273.15;
-  };
-  console.log(tempInfo);
   if (tempInfo !== undefined) {
     return (
-      <Card className={classes.card}>
+      <Card className={classes.card} style={{ backgroundColor: "transparent", boxShadow: "none" }}>
         <CardMedia className={classes.media} image={sunny} title="asdasda">
           <Typography className={classes.weather} variant="h1" component="h1">
             {tempInfo.name}
@@ -55,6 +53,11 @@ const CustomCard = ({ tempInfo }) => {
             <img src={sun} alt="sunny" className={classes.icon} />
           </Typography>
         </CardMedia>
+        {/* <hr /> */}
+        <CardContent>
+          <CustomSlider hourly={hourly} />
+        </CardContent>
+        {/* <hr /> */}
       </Card>
     );
   } else
