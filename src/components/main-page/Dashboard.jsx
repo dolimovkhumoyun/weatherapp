@@ -3,6 +3,7 @@ import axios from "axios";
 
 import BottomNav from "../common/BottomNav";
 import CustomCard from "../common/CustomCard";
+import { Grid } from "@material-ui/core";
 
 const Dashboard = () => {
   const [tempInfo, setTempInfo] = useState(); // daily temperature information
@@ -23,7 +24,11 @@ const Dashboard = () => {
   }, []);
   return (
     <React.Fragment>
-      <CustomCard tempInfo={tempInfo} hourly={hourly} />
+      <Grid container>
+        <div style={{ backgroundColor: "#1F4371", width: "100vw", height: "100vh" }}>
+          <CustomCard tempInfo={tempInfo} hourly={hourly} />
+        </div>
+      </Grid>
       <BottomNav />
     </React.Fragment>
   );
