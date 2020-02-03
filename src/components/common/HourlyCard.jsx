@@ -29,7 +29,6 @@ const HourlyCard = ({ tempInfo, hourly }) => {
   const [todaysForecast, setTodays] = useState();
 
   useEffect(() => {
-    console.log(hourly);
     if (hourly !== undefined) {
       let todays = _.filter(hourly.list, function(o) {
         return moment.unix(o.dt).format("YYYY-MM-DD");

@@ -29,6 +29,22 @@ const Dashboard = () => {
         setHourly(res.data);
       });
   }, []);
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(
+      function(position) {
+        let pos = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        };
+        let latt = pos.lat;
+        let lngg = pos.lng;
+        alert("point :" + latt + "," + lngg);
+      },
+      function() {}
+    );
+  }, []);
+
   return (
     <React.Fragment>
       <Grid container>
