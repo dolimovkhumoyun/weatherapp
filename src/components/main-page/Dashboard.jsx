@@ -9,6 +9,7 @@ import HourlyCard from "../common/HourlyCard";
 const Dashboard = () => {
   const [tempInfo, setTempInfo] = useState(); // daily temperature information
   const [hourly, setHourly] = useState(); // hourly temperature information
+  const [location, setLocation] = useState({}); // location information
   useEffect(() => {
     const data = {
       appid: "d9a874e000f1abc81aa5eec21fcf2192",
@@ -16,35 +17,34 @@ const Dashboard = () => {
     };
     axios
       .get(
-        `https://api.openweathermap.org/data/2.5/weather?q=${data.q}&appid=${data.appid}`
+        `https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitute}&appid=${data.appid}`
       )
       .then(res => {
         setTempInfo(res.data);
       });
     axios
       .get(
-        `https://api.openweathermap.org/data/2.5/forecast?q=${data.q}&appid=${data.appid}`
+        `https://api.openweathermap.org/data/2.5/forecast?lat=${location.latitude}&lon=${location.longitute}&appid=${data.appid}`
       )
       .then(res => {
         setHourly(res.data);
       });
-  }, []);
+  }, [location]);
 
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition(
-      function(position) {
-        let pos = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
-        };
-        let latt = pos.lat;
-        let lngg = pos.lng;
-        alert("point :" + latt + "," + lngg);
-      },
-      function() {}
-    );
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(displayLocationInfo);
+    }
+
+    function displayLocationInfo(position) {
+      const lng = position.coords.longitude;
+      const lat = position.coords.latitude;
+      let location = { longitute: lng, latitude: lat };
+      setLocation(location);
+    }
   }, []);
 
+  console.log(location);
   return (
     <React.Fragment>
       <Grid container>
