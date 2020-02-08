@@ -6,6 +6,9 @@ import CustomCard from "../common/CustomCard";
 import { Grid } from "@material-ui/core";
 import HourlyCard from "../common/HourlyCard";
 
+import { PullToRefresh } from "react-js-pull-to-refresh";
+import { PullDownContent, ReleaseContent, RefreshContent } from "react-js-pull-to-refresh";
+
 const Dashboard = () => {
   const [tempInfo, setTempInfo] = useState(); // daily temperature information
   const [hourly, setHourly] = useState(); // hourly temperature information
@@ -15,20 +18,22 @@ const Dashboard = () => {
       appid: "d9a874e000f1abc81aa5eec21fcf2192",
       q: "Andijan"
     };
-    axios
-      .get(
-        `https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitute}&appid=${data.appid}`
-      )
-      .then(res => {
-        setTempInfo(res.data);
-      });
-    axios
-      .get(
-        `https://api.openweathermap.org/data/2.5/forecast?lat=${location.latitude}&lon=${location.longitute}&appid=${data.appid}`
-      )
-      .then(res => {
-        setHourly(res.data);
-      });
+    if (location.latitude !== undefined) {
+      axios
+        .get(
+          `https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitute}&appid=${data.appid}`
+        )
+        .then(res => {
+          setTempInfo(res.data);
+        });
+      axios
+        .get(
+          `https://api.openweathermap.org/data/2.5/forecast?lat=${location.latitude}&lon=${location.longitute}&appid=${data.appid}`
+        )
+        .then(res => {
+          setHourly(res.data);
+        });
+    }
   }, [location]);
 
   useEffect(() => {
@@ -44,21 +49,35 @@ const Dashboard = () => {
     }
   }, []);
 
-  console.log(location);
+  const onRefresh = e => {
+    window.location.reload();
+  };
+
   return (
     <React.Fragment>
-      <Grid container>
-        <div
-          style={{
-            backgroundColor: "#1F4371",
-            width: "100vw",
-            height: "100vh"
-          }}
-        >
-          <CustomCard tempInfo={tempInfo} />
-          <HourlyCard hourly={hourly} />
-        </div>
-      </Grid>
+      <PullToRefresh
+        pullDownContent={<PullDownContent />}
+        releaseContent={<ReleaseContent />}
+        refreshContent={<RefreshContent />}
+        pullDownThreshold={200}
+        onRefresh={onRefresh}
+        triggerHeight={50}
+        backgroundColor="white"
+        startInvisible={true}
+      >
+        <Grid container>
+          <div
+            style={{
+              backgroundColor: "#1F4371",
+              width: "100vw",
+              height: "100vh"
+            }}
+          >
+            <CustomCard tempInfo={tempInfo} />
+            <HourlyCard hourly={hourly} />
+          </div>
+        </Grid>
+      </PullToRefresh>
       <BottomNav />
     </React.Fragment>
   );
