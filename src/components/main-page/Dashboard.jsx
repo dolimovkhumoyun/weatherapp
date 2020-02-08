@@ -5,9 +5,7 @@ import BottomNav from "../common/BottomNav";
 import CustomCard from "../common/CustomCard";
 import { Grid } from "@material-ui/core";
 import HourlyCard from "../common/HourlyCard";
-
-import { PullToRefresh } from "react-js-pull-to-refresh";
-import { PullDownContent, ReleaseContent, RefreshContent } from "react-js-pull-to-refresh";
+import ReactPullToRefresh from "react-pull-to-refresh";
 
 const Dashboard = () => {
   const [tempInfo, setTempInfo] = useState(); // daily temperature information
@@ -49,21 +47,18 @@ const Dashboard = () => {
     }
   }, []);
 
-  const onRefresh = e => {
+  const handleRefresh = e => {
     window.location.reload();
   };
 
   return (
     <React.Fragment>
-      <PullToRefresh
-        pullDownContent={<PullDownContent />}
-        releaseContent={<ReleaseContent />}
-        refreshContent={<RefreshContent />}
-        pullDownThreshold={200}
-        onRefresh={onRefresh}
-        triggerHeight={50}
-        backgroundColor="white"
-        startInvisible={true}
+      <ReactPullToRefresh
+        onRefresh={handleRefresh}
+        className="your-own-class-if-you-want"
+        style={{
+          textAlign: "center"
+        }}
       >
         <Grid container>
           <div
@@ -77,7 +72,7 @@ const Dashboard = () => {
             <HourlyCard hourly={hourly} />
           </div>
         </Grid>
-      </PullToRefresh>
+      </ReactPullToRefresh>
       <BottomNav />
     </React.Fragment>
   );
