@@ -7,7 +7,7 @@ const App = ({ props }) => {
 
   useEffect(() => {
     props.history.push(`/${location}`);
-  }, [location]);
+  }, [location, props.history]);
 
   return (
     <React.Fragment>

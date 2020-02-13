@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
@@ -32,7 +32,11 @@ const BottomNav = ({ location, onNavChange }) => {
         className={classes.stickToBottom}
       >
         <BottomNavigationAction label="Weather" value="" icon={<TodayIcon />} />
-        <BottomNavigationAction label="Nearby" value="explore" icon={<ExploreIcon />} />
+        <BottomNavigationAction
+          label="Nearby"
+          value="explore"
+          icon={<ExploreIcon />}
+        />
       </BottomNavigation>
     </Grid>
   );
