@@ -1,10 +1,7 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React from "react";
 
-import BottomNav from "../common/BottomNav";
-import CustomCard from "../common/CustomCard";
-import { Grid } from "@material-ui/core";
-import HourlyCard from "../common/HourlyCard";
+import App from "../layout/AppLayout/App";
+
 
 const Dashboard = () => {
   const [tempInfo, setTempInfo] = useState(); // daily temperature information
@@ -64,6 +61,10 @@ const Dashboard = () => {
       <BottomNav />
     </React.Fragment>
   );
+
+const Dashboard = props => {
+  return <App props={props} />;
+
 };
 
 export default Dashboard;
