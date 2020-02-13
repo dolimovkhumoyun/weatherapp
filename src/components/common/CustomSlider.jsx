@@ -43,7 +43,18 @@ const CustomSlider = ({ hourly }) => {
     let component = hourly.map(d => (
       <div key={d.dt}>
         <Grid container justify="center" alignItems="center">
-          <Grid item xs={12}>
+
+          <Grid>
+            <Typography className={classes.time}>
+              {moment.unix(d.dt).format("HH")}:00
+            </Typography>
+          </Grid>
+          <Grid>
+            <Typography className={classes.weather}>
+              {kelvinToCelcium(d.main.temp)}°
+            </Typography>
+          </Grid>
+          <Grid>          <Grid item xs={12}>
             <Typography className={classes.time}>{moment.unix(d.dt).format("HH")}:00</Typography>
           </Grid>
           <Grid container justify="center" alignItems="center">
