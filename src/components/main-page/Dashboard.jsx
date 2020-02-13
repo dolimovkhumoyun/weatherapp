@@ -9,7 +9,10 @@ import HourlyCard from "../common/HourlyCard";
 const Dashboard = () => {
   const [tempInfo, setTempInfo] = useState(); // daily temperature information
   const [hourly, setHourly] = useState(); // hourly temperature information
-  const [location, setLocation] = useState({}); // location information
+  const [location, setLocation] = useState({
+    latitude: 41.2995,
+    longitute: 69.2401
+  }); // location information
   useEffect(() => {
     const data = {
       appid: "d9a874e000f1abc81aa5eec21fcf2192",
@@ -44,7 +47,6 @@ const Dashboard = () => {
     }
   }, []);
 
-  console.log(location);
   return (
     <React.Fragment>
       <Grid container>
