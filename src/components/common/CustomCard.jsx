@@ -13,7 +13,7 @@ const useStyles = makeStyles({
     width: "98vw",
     marginTop: 10,
     marginLeft: "1vw",
-    backgroundColor: "#76A7E3"
+    backgroundColor: "#5B3C86"
   },
   weather: {
     fontFamily: "Helvetica",
