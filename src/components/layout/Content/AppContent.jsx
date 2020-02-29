@@ -1,6 +1,7 @@
 import React from "react";
-import Weather from "../../../routes/weather";
 import { Route, Switch } from "react-router-dom";
+
+import Weather from "../../../routes/weather";
 import Explore from "../../../routes/explore";
 
 const AppContent = () => {

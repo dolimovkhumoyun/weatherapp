@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
+
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
@@ -16,11 +18,18 @@ const useStyles = makeStyles({
   }
 });
 
-const BottomNav = ({ location, onNavChange }) => {
+const BottomNav = () => {
+  const [location, setLocation] = useState("");
+  const history = useHistory();
   const classes = useStyles();
 
+  useEffect(() => {
+    setLocation(history.location.pathname);
+  }, [history.location.pathname]);
+
   const handleChange = (event, newValue) => {
-    onNavChange(newValue);
+    setLocation(newValue);
+    history.push(`${newValue}`);
   };
 
   return (
@@ -31,10 +40,14 @@ const BottomNav = ({ location, onNavChange }) => {
         position="fixed"
         className={classes.stickToBottom}
       >
-        <BottomNavigationAction label="Weather" value="" icon={<TodayIcon />} />
+        <BottomNavigationAction
+          label="Weather"
+          value="/"
+          icon={<TodayIcon />}
+        />
         <BottomNavigationAction
           label="Nearby"
-          value="explore"
+          value="/explore"
           icon={<ExploreIcon />}
         />
       </BottomNavigation>

@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import { Grid } from "@material-ui/core";
-import ReactPullToRefresh from "react-pull-to-refresh";
+// import ReactPullToRefresh from "react-pull-to-refresh";
 import SearchIcon from "@material-ui/icons/Search";
 import InputBase from "@material-ui/core/InputBase";
+
+import _ from "lodash";
+import cities from "cities.json";
+import CustomList from "./List";
 
 const useStyles = makeStyles(theme => ({
   search: {
@@ -47,43 +51,61 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 const Explore = () => {
+  const [search, setSearch] = useState("");
+  const [towns, setTowns] = useState([]); // Searched towns
   const classes = useStyles();
-  const handleRefresh = e => {
-    window.location.reload();
+  // const handleRefresh = e => {
+  //   window.location.reload();
+  // };
+
+  const onChange = e => {
+    setSearch(e.target.value);
+  };
+  const onEnter = e => {
+    if (e.keyCode === 13) {
+      const data = _.filter(cities, function(o) {
+        return _.startsWith(o.name, e.target.value);
+      });
+      setTowns(data);
+    }
   };
 
   return (
-    <ReactPullToRefresh
-      onRefresh={handleRefresh}
-      className="your-own-class-if-you-want"
-      style={{
-        textAlign: "center"
-      }}
-    >
-      <Grid container>
-        <div
-          style={{
-            backgroundColor: "#1976D2",
-            width: "100vw",
-            height: "100vh"
-          }}
-        >
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput
-              }}
-              inputProps={{ "aria-label": "search" }}
-            />
+    // <ReactPullToRefresh
+    //   onRefresh={handleRefresh}
+    //   className="your-own-class-if-you-want"
+    //   style={{
+    //     textAlign: "center"
+    //   }}
+    // >
+    <Grid container>
+      <div
+        style={{
+          backgroundColor: "#1976D2",
+          width: "100vw",
+          height: "100vh"
+        }}
+      >
+        <div className={classes.search}>
+          <div className={classes.searchIcon}>
+            <SearchIcon />
           </div>
+          <InputBase
+            placeholder="Search…"
+            classes={{
+              root: classes.inputRoot,
+              input: classes.inputInput
+            }}
+            inputProps={{ "aria-label": "search" }}
+            value={search}
+            onChange={onChange}
+            onKeyDown={onEnter}
+          />
         </div>
-      </Grid>
-    </ReactPullToRefresh>
+        <CustomList data={towns} />
+      </div>
+    </Grid>
+    // </ReactPullToRefresh>
   );
 };
 

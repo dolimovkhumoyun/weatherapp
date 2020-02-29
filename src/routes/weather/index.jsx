@@ -61,7 +61,7 @@ const Weather = () => {
       <Grid container>
         <div
           style={{
-            backgroundColor: "#1F4371",
+            backgroundColor: "#8B4290",
             width: "100vw",
             height: "100vh"
           }}
