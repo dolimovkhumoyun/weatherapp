@@ -54,9 +54,6 @@ const Explore = () => {
   const [search, setSearch] = useState("");
   const [towns, setTowns] = useState([]); // Searched towns
   const classes = useStyles();
-  // const handleRefresh = e => {
-  //   window.location.reload();
-  // };
 
   const onChange = e => {
     setSearch(e.target.value);
@@ -69,15 +66,7 @@ const Explore = () => {
       setTowns(data);
     }
   };
-
   return (
-    // <ReactPullToRefresh
-    //   onRefresh={handleRefresh}
-    //   className="your-own-class-if-you-want"
-    //   style={{
-    //     textAlign: "center"
-    //   }}
-    // >
     <Grid container>
       <div
         style={{
@@ -105,7 +94,6 @@ const Explore = () => {
         <CustomList data={towns} />
       </div>
     </Grid>
-    // </ReactPullToRefresh>
   );
 };
 
