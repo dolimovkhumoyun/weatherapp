@@ -52,9 +52,7 @@ const CustomCard = ({ tempInfo, hourly }) => {
                 {kelvinToCelcium(tempInfo.main.temp)}°<br />
               </Typography>
 
-              <Typography className={classes.description}>
-                {tempInfo.weather[0].description}
-              </Typography>
+              <Typography className={classes.description}>{tempInfo.weather[0].description}</Typography>
             </Grid>
             <Grid item xs={6}>
               <img

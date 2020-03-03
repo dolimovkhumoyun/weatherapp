@@ -1,14 +1,18 @@
-import React, { useState } from "react";
-import _ from "lodash";
+// React
+import React, { useState, useEffect } from "react";
+
+// Custom
+
+// third-party
 import { makeStyles } from "@material-ui/core/styles";
+import _ from "lodash";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
+import IconButton from "@material-ui/core/IconButton";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
+import ListItemText from "@material-ui/core/ListItemText";
 import RemoveCircleIcon from "@material-ui/icons/RemoveCircle";
-import { useEffect } from "react";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -76,13 +80,7 @@ const CustomList = ({ data }) => {
             </React.Fragment>
           }
         />
-        <IconButton
-          aria-label="delete"
-          color="primary"
-          className={classes.margin}
-          size="medium"
-          // onClick={event => onClick(event, d.name)}
-        >
+        <IconButton aria-label="delete" color="primary" className={classes.margin} size="medium">
           {renderIcon(d.name)}
         </IconButton>
       </ListItem>

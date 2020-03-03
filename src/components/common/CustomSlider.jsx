@@ -1,15 +1,17 @@
+// React
 import React from "react";
-import moment from "moment";
 
-import Grid from "@material-ui/core/Grid";
-import { makeStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-
+// Custom
 import { kelvinToCelcium } from "../../utils/utils";
+
+// third-party
+import moment from "moment";
+import Slider from "react-slick";
+import { makeStyles } from "@material-ui/core/styles";
+
+// material-uui
+import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles({
   time: {
@@ -44,14 +46,10 @@ const CustomSlider = ({ hourly }) => {
       <div key={d.dt}>
         <Grid container justify="center" alignItems="center">
           <Grid>
-            <Typography className={classes.time}>
-              {moment.unix(d.dt).format("HH")}:00
-            </Typography>
+            <Typography className={classes.time}>{moment.unix(d.dt).format("HH")}:00</Typography>
           </Grid>
           <Grid>
-            <Typography className={classes.weather}>
-              {kelvinToCelcium(d.main.temp)}°
-            </Typography>
+            <Typography className={classes.weather}>{kelvinToCelcium(d.main.temp)}°</Typography>
           </Grid>
           <Grid container justify="center" alignItems="center">
             <img
