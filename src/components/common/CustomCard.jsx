@@ -40,14 +40,13 @@ const useStyles = makeStyles({
 
 const CustomCard = ({ tempInfo, hourly }) => {
   const classes = useStyles();
-
   if (tempInfo !== undefined) {
     return (
       <Card className={classes.card}>
         <CardContent className={classes.media}>
           <Grid container spacing={6}>
             <Grid item xs={6}>
-              {/* <Typography className={classes.name}>{tempInfo.name}</Typography> */}
+              <Typography className={classes.name}>{tempInfo.name}</Typography>
               <Typography className={classes.weather}>
                 {kelvinToCelcium(tempInfo.main.temp)}°<br />
               </Typography>

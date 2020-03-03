@@ -12,6 +12,14 @@ import "slick-carousel/slick/slick-theme.css";
 import { Grid } from "@material-ui/core";
 import Slider from "react-slick";
 
+const settings = {
+  dots: false,
+  infinite: true,
+  speed: 500,
+  slidesToShow: 1,
+  slidesToScroll: 1
+};
+
 const Weather = () => {
   const [tempInfo, setTempInfo] = useState([]); // daily temperature information
   const [hourly, setHourly] = useState([]); // hourly temperature information
@@ -26,7 +34,6 @@ const Weather = () => {
         getHourlyForecast(city, setHourly, hourly);
       });
     } else if (location !== null) {
-      console.log("Hello");
       getCurrentWeather(location, setTempInfo, tempInfo);
       getHourlyForecast(location, setHourly, hourly);
     }
@@ -44,39 +51,30 @@ const Weather = () => {
       setLocation(location);
     }
   }, []);
-  console.log(tempInfo);
-  return (
-    <Slider>
-      <div key="1">
-        <Grid container>
-          <div
-            style={{
-              backgroundColor: "#8B4290",
-              width: "100vw",
-              height: "100vh"
-            }}
-          >
-            <CustomCard tempInfo={tempInfo[0]} />
-            <HourlyCard hourly={hourly[0]} />
-          </div>
-        </Grid>
-      </div>
-      <div key="1">
-        <Grid container>
-          <div
-            style={{
-              backgroundColor: "#8B4290",
-              width: "100vw",
-              height: "100vh"
-            }}
-          >
-            <CustomCard tempInfo={tempInfo[1]} />
-            <HourlyCard hourly={hourly[1]} />
-          </div>
-        </Grid>
-      </div>
-    </Slider>
-  );
+  if (tempInfo.length > 0 && hourly.length > 0) {
+    return (
+      <Slider>
+        {tempInfo.map((temp_date, index) => {
+          return (
+            <div key={index}>
+              <Grid container>
+                <div
+                  style={{
+                    backgroundColor: "#8B4290",
+                    width: "100vw",
+                    height: "100vh"
+                  }}
+                >
+                  <CustomCard tempInfo={tempInfo[index]} />
+                  <HourlyCard hourly={hourly[index]} />
+                </div>
+              </Grid>
+            </div>
+          );
+        })}
+      </Slider>
+    );
+  } else return "";
 };
 
 export default Weather;

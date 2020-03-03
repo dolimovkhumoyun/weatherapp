@@ -6,7 +6,6 @@ const data = {
 };
 
 export const getCurrentWeather = (location, setData, initial_data) => {
-  console.log(location);
   axios
     .get(
       `https://api.openweathermap.org/data/2.5/weather?lat=${location.lat}&lon=${location.lng}&appid=${data.appid}`
