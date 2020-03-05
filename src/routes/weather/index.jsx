@@ -9,16 +9,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 // third-party
-import { Grid } from "@material-ui/core";
-import Slider from "react-slick";
-
-const settings = {
-  dots: false,
-  infinite: true,
-  speed: 500,
-  slidesToShow: 1,
-  slidesToScroll: 1
-};
+import { CarouselProvider, Slider, Slide } from "pure-react-carousel";
+import "pure-react-carousel/dist/react-carousel.es.css";
 
 const Weather = () => {
   const [tempInfo, setTempInfo] = useState([]); // daily temperature information
@@ -53,26 +45,28 @@ const Weather = () => {
   }, []);
   if (tempInfo.length > 0 && hourly.length > 0) {
     return (
-      <Slider>
-        {tempInfo.map((temp_date, index) => {
-          return (
-            <div key={index}>
-              <Grid container>
-                <div
-                  style={{
-                    backgroundColor: "#8B4290",
-                    width: "100vw",
-                    height: "100vh"
-                  }}
-                >
-                  <CustomCard tempInfo={tempInfo[index]} />
-                  <HourlyCard hourly={hourly[index]} />
-                </div>
-              </Grid>
-            </div>
-          );
-        })}
-      </Slider>
+      <div
+        style={{
+          backgroundColor: "#8B4290",
+          width: "100vw",
+          height: "100vh"
+        }}
+      >
+        <CarouselProvider naturalSlideWidth={100} naturalSlideHeight={150} totalSlides={tempInfo.length}>
+          <Slider>
+            {tempInfo.map((temp_date, index) => {
+              return (
+                <Slide index={index}>
+                  <div key={index}>
+                    <CustomCard tempInfo={tempInfo[index]} />
+                    <HourlyCard hourly={hourly[index]} />
+                  </div>
+                </Slide>
+              );
+            })}
+          </Slider>
+        </CarouselProvider>
+      </div>
     );
   } else return "";
 };

@@ -11,7 +11,7 @@ import ExploreIcon from "@material-ui/icons/Explore";
 const useStyles = makeStyles({
   stickToBottom: {
     width: "100%",
-    position: "fixed",
+    position: "absolute",
     height: 70,
     bottom: 0,
     backgroundColor: "#F5F5F5"
@@ -40,16 +40,8 @@ const BottomNav = () => {
         position="fixed"
         className={classes.stickToBottom}
       >
-        <BottomNavigationAction
-          label="Weather"
-          value="/"
-          icon={<TodayIcon />}
-        />
-        <BottomNavigationAction
-          label="Nearby"
-          value="/explore"
-          icon={<ExploreIcon />}
-        />
+        <BottomNavigationAction label="Weather" value="/" icon={<TodayIcon />} />
+        <BottomNavigationAction label="Nearby" value="/explore" icon={<ExploreIcon />} />
       </BottomNavigation>
     </Grid>
   );
