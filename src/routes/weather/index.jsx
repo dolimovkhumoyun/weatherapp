@@ -11,6 +11,7 @@ import "slick-carousel/slick/slick-theme.css";
 // third-party
 import { CarouselProvider, Slider, Slide } from "pure-react-carousel";
 import "pure-react-carousel/dist/react-carousel.es.css";
+import { LinearProgress } from "@material-ui/core";
 
 const Weather = () => {
   const [tempInfo, setTempInfo] = useState([]); // daily temperature information
@@ -49,10 +50,10 @@ const Weather = () => {
         style={{
           backgroundColor: "#8B4290",
           width: "100vw",
-          height: "100vh"
+          height: "100%"
         }}
       >
-        <CarouselProvider naturalSlideWidth={100} naturalSlideHeight={150} totalSlides={tempInfo.length}>
+        <CarouselProvider naturalSlideWidth={100} naturalSlideHeight={230} totalSlides={tempInfo.length}>
           <Slider>
             {tempInfo.map((temp_date, index) => {
               return (
@@ -68,7 +69,18 @@ const Weather = () => {
         </CarouselProvider>
       </div>
     );
-  } else return "";
+  } else
+    return (
+      <div
+        style={{
+          backgroundColor: "#8B4290",
+          width: "100vw",
+          height: "100vh"
+        }}
+      >
+        <LinearProgress />
+      </div>
+    );
 };
 
 export default Weather;
