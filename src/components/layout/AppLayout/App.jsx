@@ -1,12 +1,15 @@
 import React from "react";
 import BottomNav from "../../common/BottomNav";
 import AppContent from "../Content/AppContent";
+import { Grid } from "@material-ui/core";
 
 const App = ({ props }) => {
   return (
     <React.Fragment>
-      <AppContent />
-      <BottomNav />
+      <Grid container>
+        <AppContent />
+        <BottomNav />
+      </Grid>
     </React.Fragment>
   );
 };

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
 import { makeStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import TodayIcon from "@material-ui/icons/Today";
@@ -33,17 +32,15 @@ const BottomNav = () => {
   };
 
   return (
-    <Grid container>
-      <BottomNavigation
-        value={location}
-        onChange={handleChange}
-        position="fixed"
-        className={classes.stickToBottom}
-      >
-        <BottomNavigationAction label="Weather" value="/" icon={<TodayIcon />} />
-        <BottomNavigationAction label="Nearby" value="/explore" icon={<ExploreIcon />} />
-      </BottomNavigation>
-    </Grid>
+    <BottomNavigation
+      value={location}
+      onChange={handleChange}
+      position="fixed"
+      className={classes.stickToBottom}
+    >
+      <BottomNavigationAction label="Weather" value="/" icon={<TodayIcon />} />
+      <BottomNavigationAction label="Nearby" value="/explore" icon={<ExploreIcon />} />
+    </BottomNavigation>
   );
 };
 

@@ -11,8 +11,8 @@ import { kelvinToCelcium } from "../../utils/utils";
 const useStyles = makeStyles({
   card: {
     width: "98vw",
-    marginTop: 10,
     marginLeft: "1vw",
+    marginTop: 10,
     backgroundColor: "#5B3C86"
   },
   weather: {
