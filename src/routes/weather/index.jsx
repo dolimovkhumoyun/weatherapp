@@ -25,11 +25,13 @@ const Weather = () => {
       elements.map(city => {
         getCurrentWeather(city, setTempInfo, tempInfo);
         getHourlyForecast(city, setHourly, hourly);
+        return false;
       });
     } else if (location !== null) {
       getCurrentWeather(location, setTempInfo, tempInfo);
       getHourlyForecast(location, setHourly, hourly);
     }
+    //eslint-disable-next-line
   }, [location]);
 
   useEffect(() => {
